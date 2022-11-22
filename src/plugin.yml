@@ -1,0 +1,13 @@
+name: Dragons
+main: nvenc.Start
+version: 1
+api-version: 1.19
+load: POSTWORLD
+author: Nvenc
+permissions:
+  dragons.admin:
+    default: false
+    description: Allows the command
+commands:
+  dragons:
+    description: Dragon Respawn Help
