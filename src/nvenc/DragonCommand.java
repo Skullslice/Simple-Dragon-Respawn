@@ -20,35 +20,40 @@ public class DragonCommand implements CommandExecutor {
             try {
                 Location bedrock = ((Player) commandSender).getLocation();
                 String crysloc = Math.floor(bedrock.getX()) + ", " + Math.floor(bedrock.getY()) + ", " + Math.floor(bedrock.getZ());
+                //String crysloc = bedrock.getX() + ", " + bedrock.getY() + ", " + bedrock.getZ();
                 switch (String.join(" ", args)) {
                     case "crystal 1":
                         commandSender.sendMessage(instance.crystala + ", " + crysloc);
                         instance.cl1 = bedrock;
                         instance.getConfig().set("X, Y, Z (a)", crysloc);
+                        instance.saveConfig();
                         break;
                     case "crystal 2":
                         commandSender.sendMessage(instance.crystalb + ", " + crysloc);
                         instance.cl2 = bedrock;
                         instance.getConfig().set("X, Y, Z (b)", crysloc);
+                        instance.saveConfig();
                         break;
                     case "crystal 3":
                         commandSender.sendMessage(instance.crystalc + ", " + crysloc);
                         instance.cl3 = bedrock;
                         instance.getConfig().set("X, Y, Z (c)", crysloc);
+                        instance.saveConfig();
                         break;
                     case "crystal 4":
                         commandSender.sendMessage(instance.crystald + ", " + crysloc);
                         instance.cl4 = bedrock;
                         instance.getConfig().set("X, Y, Z (d)", crysloc);
+                        instance.saveConfig();
                         break;
                     default:
                         commandSender.sendMessage(new String[]{instance.help1, instance.help2, instance.help3});
                         break;
                 }
                 if (String.join(" ", args).contains("interval")) {
-                    commandSender.sendMessage(instance.setInterval + Long.parseLong(args[2]));
-                    instance.getConfig().set("respawn_interval", Long.parseLong(args[2]));
-                    instance.handler.respawnTime = Long.parseLong(args[2]);
+                    commandSender.sendMessage(instance.setInterval + Long.parseLong(args[1]));
+                    instance.getConfig().set("respawn_interval", Long.parseLong(args[1]));
+                    instance.handler.respawnTime = Long.parseLong(args[1]);
                 }
                 if (String.join(" ", args).contains("reload")) {
                     instance.reloadConfig();

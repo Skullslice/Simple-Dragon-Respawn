@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
@@ -31,12 +32,14 @@ public class Start extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        this.handler = new Handling(this);
+        this.cmd = new DragonCommand(this);
         this.getConfig().addDefault("respawn_interval", 60000); // 1 minute to set the crystals back
         this.getConfig().addDefault("X, Y, Z (a)", "[]");
         this.getConfig().addDefault("X, Y, Z (b)", "[]");
         this.getConfig().addDefault("X, Y, Z (c)", "[]");
         this.getConfig().addDefault("X, Y, Z (d)", "[]");
-        config.options().copyDefaults(true);
+        //config.options().copyDefaults(true);
         saveConfig();
         getCommand("dragons").setExecutor(new DragonCommand(this));
         handler.now = System.currentTimeMillis();
@@ -58,10 +61,16 @@ public class Start extends JavaPlugin {
 
                 if (!handler.dragonAlive() && (handler.now + handler.respawnTime < System.currentTimeMillis())) {
                     if (handler.canSetBlock()) {
-                        Bukkit.getServer().getWorld("world_the_end").getBlockAt(cl1).setType(Material.END_CRYSTAL);
-                        Bukkit.getServer().getWorld("world_the_end").getBlockAt(cl2).setType(Material.END_CRYSTAL);
-                        Bukkit.getServer().getWorld("world_the_end").getBlockAt(cl3).setType(Material.END_CRYSTAL);
-                        Bukkit.getServer().getWorld("world_the_end").getBlockAt(cl4).setType(Material.END_CRYSTAL);
+                        //Bukkit.getServer().getWorld("world_the_end").getBlockAt(cl1).setBlockData(getServer().createBlockData(Material.END_CRYSTAL));
+                        //Bukkit.getServer().getWorld("world_the_end").getBlockAt(cl2).setBlockData(getServer().createBlockData(Material.END_CRYSTAL));
+                        //Bukkit.getServer().getWorld("world_the_end").getBlockAt(cl3).setBlockData(getServer().createBlockData(Material.END_CRYSTAL));
+                        //Bukkit.getServer().getWorld("world_the_end").getBlockAt(cl4).setBlockData(getServer().createBlockData(Material.END_CRYSTAL));
+                        //Bukkit.getServer().getWorld("world_the_end").getBlockAt(new Location(Bukkit.getServer().getWorld("world_the_end"), 0, 65, 0)).setType(Material.STONE);
+                        //Bukkit.getServer().getWorld("world_the_end").getBlockAt(new Location(Bukkit.getServer().getWorld("world_the_end"), 0, 66, 0)).setType(Material.END_CRYSTAL);
+                        Bukkit.getServer().getWorld("world_the_end").spawnEntity(cl1, EntityType.ENDER_CRYSTAL);
+                        Bukkit.getServer().getWorld("world_the_end").spawnEntity(cl2, EntityType.ENDER_CRYSTAL);
+                        Bukkit.getServer().getWorld("world_the_end").spawnEntity(cl3, EntityType.ENDER_CRYSTAL);
+                        Bukkit.getServer().getWorld("world_the_end").spawnEntity(cl4, EntityType.ENDER_CRYSTAL);
                     }else {
                         Bukkit.getServer().getConsoleSender().sendMessage("Couldn't set the end crystals.");
                     }

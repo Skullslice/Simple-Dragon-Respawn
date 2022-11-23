@@ -7,9 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,7 +28,7 @@ public class Handling implements Listener {
 
     public Location convertStr(String abc) {
         String[] next = abc.split(", ");
-        return new Location(Bukkit.getServer().getWorld("world_the_end"), Double.parseDouble(next[0]), Double.parseDouble(next[1]), Double.parseDouble(next[2]), 0, 0);
+        return new Location(Bukkit.getServer().getWorld("world_the_end"), Double.parseDouble(next[0]) + 0.5, Double.parseDouble(next[1]) + 1, Double.parseDouble(next[2]) + 0.5, 0, 0);
     }
 
 
